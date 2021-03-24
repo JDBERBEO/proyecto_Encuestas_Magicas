@@ -1,0 +1,50 @@
+
+
+{{>navbar}}
+
+{{!-- new survey form --}}
+
+
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-7">
+
+			<div class="card" style="margin-top:10px;">
+			<div class="card-body">
+				<h5 class="card-title">Voting Area</h5>
+
+				
+				<div class="mb-3">
+					<label class="form-label">{{name}}</label>
+				</div>
+				<div class="mb-3">
+					<p>{{description}}</p>
+				</div>
+	
+				<div class="mb-3">
+					<label class="form-label">Select your answer</label>
+				</div>
+				<form action="/polls/{{_id}}" method="POST">
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="{{optionOne.value}}">
+					<label class="form-check-label" for="flexRadioDefault1">{{optionOne.value}}</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" unchecked value="{{optionTwo.value}}">
+					<label class="form-check-label" for="flexRadioDefault2">{{optionTwo.value}}</label>
+				</div>
+				<div class="mb-3">
+					<a href="/" class="card-link">Cancel</a>
+					<button class="btn btn-primary" type="submit">VOTE</button>
+				</div>
+				
+				</form>
+			</div>
+			</div>
+			</div>
+
+		</div>
+	</div>
+
+
+

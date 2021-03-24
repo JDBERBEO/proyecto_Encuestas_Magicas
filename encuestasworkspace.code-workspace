@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../mongodbtest"
+		},
+		{
+			"path": "../prueba_req_body_vistacontralador"
+		}
+	],
+	"settings": {}
+}

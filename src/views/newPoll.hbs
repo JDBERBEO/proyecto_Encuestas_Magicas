@@ -1,0 +1,56 @@
+
+{{>navbar}}
+
+{{!-- new survey form --}}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6">
+
+        <div class="card" style=" margin-top:10px;">
+          <div class="card-body">
+            <h5 class="card-title">New Poll
+              
+            </h5>
+            
+            
+            <form action="/newPoll" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" placeholder="Insert the poll's name" name="name">
+                <div class="form-text">insert the 'required' alert</div>
+            </div>
+            <div class="form-floating">
+            
+              
+                <textarea type="text" class="form-control" placeholder="Write a brief description of your poll" id="floatingTextarea2" style="height: 100px" name="description"></textarea>
+                <label for="floatingTextarea2">Write a brief description of your poll</label>
+                <div class="form-text">insert the 'required' alert</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Options</label>
+                <input type="text" class="form-control" placeholder="Option 1" name="optionOne[value]">
+                <div class="form-text">insert the 'required' alert</div>
+                <input type="text" class="form-control" placeholder="Option 2" name="optionTwo[value]">
+                <div class="form-text">insert the 'required' alert</div>
+                <input type="text" class="form-control" placeholder="Option 3" name="optionThree[value]">
+                <div class="form-text">insert the 'required' alert</div>
+                <input type="text" class="form-control" placeholder="Option 4" name="optionFour[value]">
+                <div class="form-text">insert the 'required' alert</div>
+            </div>
+            
+            <div class="mb-3">
+                
+                <button type="submit" class="btn btn-primary">Create Poll</button>
+                <a href="/" class="card-link">Cancel</a>
+            </div>
+            
+            </form>
+          </div>
+        </div>
+    
+    </div>
+  </div>
+</div>
+
+
+

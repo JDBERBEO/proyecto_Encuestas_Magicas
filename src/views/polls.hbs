@@ -1,0 +1,71 @@
+
+{{> navbar }}
+{{#if empty}}
+<div class="card" style="width: 18rem; margin-top:20px">
+  <div class="card-body">
+    <h5 class="card-title">UPPS...</h5>
+    <p class="card-text">No hay encuestas</p>
+  </div>
+</div>
+{{/if}}
+<div class="container" style="margin-top:20px">
+  <div class="row">
+    {{#each polls }} 
+    <div class="col-4">
+      <div class="card h-100 d-inline-block w-100">
+        <div class="card-header d-flex mh-2">
+          <h3 class="card-title d-flex jusify-content-between">
+            {{name}}
+            </a>
+          </h3>
+        </div>
+        <div class="card-body">
+          <p><strong>Creado por:</strong>  {{email}}. </p>
+          <p> {{ truncate description 150 }} </p>
+        </div>
+        <div class="card-footer justify-content-between ">
+          <div class="d-flex">
+            
+            <label><h5><span class="badge bg-secondary">Votos:{{totalVotes}}</span></h5></label>
+        {{#if (and ../userId (eq ../userId user)) }}
+          {{!-- <a href="/editpoll/{{_id}}"><button class="btn btn-primary" type="submit">EDIT</button></a> --}}
+            <a href="/polls/{{_id}}"><button class="btn btn-success" type="submit" style="margin-left:50px">VOTAR</button></a>
+            <a href="/polls/{{_id}}/results" style="margin-left: 0px;">resultados</a>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Eliminar encuesta...</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    ¿Estás seguro de eliminar esta encuesta?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form action="/{{_id}}?_method=DELETE" method="POST">
+                      <input type="hidden" name="_method" value="DELETE">
+                      <button class="btn btn-danger" type="submit">Eliminar</button>  
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{else}}
+            <a href="/polls/{{_id}}"><button class="btn btn-success" type="submit" style="margin-left:160px">VOTAR</button></a>
+          {{/if}}
+        
+          </div>
+        </div>
+      </div>
+    </div> 
+    {{/each}}
+  </div>
+</div>

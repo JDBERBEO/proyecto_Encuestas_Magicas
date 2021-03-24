@@ -1,0 +1,42 @@
+
+{{> navbar}}
+
+{{!-- new survey form --}}
+<div class="card" style="width: 18rem; margin-top:10px;">
+  <div class="card-body">
+    <h5 class="card-title">Edit Poll</h5>
+    
+
+    <form action="/{{_id}}?_method=PUT" method="POST">
+     <input type="hidden" name="_method" value="PUT">
+    <div class="mb-3">
+        
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" placeholder="Insert the poll's name" name="name" value={{name}}>
+        <div class="form-text">insert the 'required' alert</div>
+    </div>
+    <div class="mb-3">
+        
+        <label class="form-label">Description</label>
+        <input type="text" class="form-control" placeholder="Write a brief description of your poll" name="description" value={{ description }}>
+        <div class="form-text">insert the 'required' alert</div>
+    </div>
+    <div class="mb-3">
+        
+        <label class="form-label">Options</label>
+        <input type="text" class="form-control" placeholder="Option 1" name="optionOne" value={{optionOne.value}}>
+        <div class="form-text">insert the 'required' alert</div>
+        <input type="text" class="form-control" placeholder="Option 2" name="optionTwo" value={{optionTwo.value}}>
+        <div class="form-text">insert the 'required' alert</div>
+        <input type="text" class="form-control" placeholder="Option 3">
+        <div class="form-text">insert the 'required' alert</div>
+    </div>
+    
+    <div class="mb-3">
+        <a href="#" class="card-link">Cancel</a>
+        <button type="submit" class="btn btn-primary">SAVE</button>
+    </div>
+    
+    </form>
+  </div>
+</div>
