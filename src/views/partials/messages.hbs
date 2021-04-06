@@ -16,3 +16,28 @@
     {{errorPassword}}
 </div>
 {{/if}}
+
+{{#if errorPollName}}
+<div class="alert alert-danger" role="alert">
+    {{errorPollName}}
+</div>
+{{/if}}
+
+{{#if errorUserExists}}
+<div class="alert alert-danger" role="alert" >
+    {{errorUserExists}}
+</div>
+{{/if}}
+
+{{#if pollCreated}}
+<div class="alert alert-success" role="alert" style="width: 18rem; margin-top:20px">
+    {{pollCreated}}
+</div>
+{{/if}}
+
+{{#if errorPasswordLength}}
+<div class="alert alert-danger" role="alert">
+    {{errorPasswordLength}}
+</div>
+{{/if}}
+

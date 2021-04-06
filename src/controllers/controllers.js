@@ -38,19 +38,30 @@ const createPoll = async (req, res) => {
         //3.hacer el save
         //4.redireccionar a la raiz
         
-        const poll = new Poll({
-            name: req.body.name,
-            description: req.body.description,
-            optionOne: req.body.optionOne,
-            optionTwo: req.body.optionTwo,
-            user: res.locals.user,
-            email: res.locals.email,
-            // correctpassword: res.locals.correctpassword
-        });
-
-        await poll.save();
-        res.redirect('/'); 
-        // console.log(poll)
+        try{
+            const poll = new Poll({
+                name: req.body.name,
+                description: req.body.description,
+                optionOne: req.body.optionOne,
+                optionTwo: req.body.optionTwo,
+                user: res.locals.user,
+                email: res.locals.email,
+                // correctpassword: res.locals.correctpassword
+            });
+            await poll.save();
+            req.flash('pollCreated', 'encuesta creada exitosamente')
+            res.redirect('/'); 
+            // console.log(poll)
+            
+        } catch (error) {
+            
+            // req.flash('errorPollName', 'Se requiere como mínimo el nombre de la encuesta, la descripción y dos opciones de respuestas')
+            // res.redirect('/newpoll')
+            // res.send('<h1>Ups something went wrong, user name or password already exists</h1>') //buscar flash message, se hace el mensjae y un redirect al signup
+            res.render('newPoll', {errors:error.errors})
+            console.log(error.errors['optionOne.value'].message)
+            
+        } 
     } 
 
 const deletePoll = async (req, res) => {

@@ -1,6 +1,7 @@
 const User = require('../models/userModel')
 const bcrypt = require('bcrypt')
 
+const USEREXIST = 11000
 
 const signupUser = (req, res) => {
     res.render('register')
@@ -11,38 +12,26 @@ const loginUser = (req,res) => {
 }
 
 const createUser = async (req, res) => {
-    
-    // const {email, password} = req.body
-
-    // if (password === '' || email === '') {
-    //             req.flash('errorPassword', 'password o email son requerido')
-    //             res.redirect('/signup')
-    //         }
-    
-    // else if (error) {
-    //     req.flash('errorSignup', 'El usuario ya existe')
-    // res.redirect('/signup')
-    // }
-    // else {
-        
-    //     const user = new User({ email, password })
-    //         await user.save()
-    //         res.redirect('/login')
-    // }
 
     try{
     const { email, password} = req.body
-    
     const user = new User({ email, password })
     await user.save()
     res.redirect('/login')
 } catch (error) {
+
+    if (error.code === USEREXIST) {
+        req.flash('errorUserExists', 'El usuario ya existe')
+        res.redirect('/signup')
+    }
     
+    else {
+        // req.flash('errorSignup', 'Se requiere llenar los campos de email y clave')
+        
+        res.render('register', {errors:error.errors})
+        console.log('this is erros email: ', error.errors.email)
+    }
     
-    req.flash('errorSignup', 'El usuario ya existe')
-    res.redirect('/signup')
-    // res.send('<h1>Ups something went wrong, user name or password already exists</h1>') //buscar flash message, se hace el mensjae y un redirect al signup
-    console.log(error)
 } 
 
 }
@@ -68,12 +57,12 @@ const getUser = async (req,res) => {
             res.redirect('/') 
         }
         else {
-            req.flash('errorMsg', 'User or password are incorrect')
+            req.flash('errorMsg', 'Usuario o contraseña son incorrectos')
             res.redirect('/login')   
         }
 
     }else {
-        req.flash('errorMsg', 'User or password are incorrect')
+        req.flash('errorMsg', 'Usuario o contraseña son incorrectos')
         res.redirect('/login')
     }
 }

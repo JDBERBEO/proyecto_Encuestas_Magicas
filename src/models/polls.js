@@ -16,12 +16,12 @@ const pollsSchema = new Schema({
   //   ref: 'CorrectPassword'
   // },
   
-  name: {type: String, required: true},
-  description: String,
+  name: {type: String, required: [true,'se requiere el nombre']},
+  description: {type: String, required: [true,'se requiere la descripción']},
   totalVotes: Number,
   //options: [{value: String, votes: {type: Number, default: 0}}]
-  optionOne: {value: {type: String, required: true}, votes: {type: Number, default: 0}},  
-  optionTwo: {value: {type: String, required: true}, votes: {type: Number, default: 0}},
+  optionOne: {value: {type: String, required: [true,'se requiere la opción 1']}, votes: {type: Number, default: 0}},  
+  optionTwo: {value: {type: String, required: [true,'se requiere la opción 2']}, votes: {type: Number, default: 0}},
   optionThree: {value: String, votes: {type: Number, default: 0}},
   optionFour: {value: String, votes: {type: Number, default: 0}},
   status: {
@@ -30,7 +30,15 @@ const pollsSchema = new Schema({
       }
 })
 
-
+pollsSchema.pre('save', function (next) {
+  try {
+    this.name > 0
+    console.log(this.password)
+    next();
+  } catch (error) {
+    next(error)
+  }
+})
 
 module.exports = model('Poll', pollsSchema)
 

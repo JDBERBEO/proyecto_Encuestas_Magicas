@@ -11,25 +11,58 @@
             <h5 class="card-title">New Poll
               
             </h5>
-            
-            
-            <form action="/newPoll" method="POST">
-            <div class="mb-3">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-control" placeholder="Insert the poll's name" name="name">
-                <div class="form-text">insert the 'required' alert</div>
+            <div>
             </div>
-            <div class="form-floating">
-            
-              
-                <textarea type="text" class="form-control" placeholder="Write a brief description of your poll" id="floatingTextarea2" style="height: 100px" name="description"></textarea>
-                <label for="floatingTextarea2">Write a brief description of your poll</label>
-                <div class="form-text">insert the 'required' alert</div>
+            {{>messages}}
+            <form action="/newPoll" method="POST" class="row g-3 needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="validationServer01" class="form-label">Name</label>
+                {{#if errors.name}}
+                <input type="text" class="form-control is-invalid"
+                placeholder="Insert the poll's name" name="name" 
+                id="validationServer01" aria-describedby="validationServer01Feedback" required>
+                {{else}}
+                <input type="text" class="form-control"
+                placeholder="Insert the poll's name" name="name" 
+                id="validationServer01" aria-describedby="validationServer01Feedback" required>
+                {{/if}}
+                {{#if errors.name}}
+                <div id="validationServer01Feedback" class="invalid-feedback">
+                {{errors.name.message}}
+                </div>
+                {{/if}}
+            </div>
+            <div class="mb-3">           
+                <label for="validationServer02" class="form-label">Write a brief description of your poll</label>
+                {{#if errors.description}}
+                <textarea type="text" class="form-control is-invalid" 
+                placeholder="Write a brief description of your poll" name="description"
+                id="validationServer02" style="height: 100px" 
+                aria-describedby="validationServer02Feedback" required></textarea>
+                {{else}}
+                <textarea type="text" class="form-control" 
+                placeholder="Write a brief description of your poll" name="description"
+                id="validationServer02" style="height: 100px" 
+                aria-describedby="validationServer02Feedback" required></textarea>
+                {{/if}}
+                {{#if errors.description}}
+                <div id="validationServer01Feedback" class="invalid-feedback">
+                {{errors.description.message}}
+                </div>
+                {{/if}}
             </div>
             <div class="mb-3">
                 <label class="form-label">Options</label>
-                <input type="text" class="form-control" placeholder="Option 1" name="optionOne[value]">
-                <div class="form-text">insert the 'required' alert</div>
+                {{!-- option1 --}}
+                <input type="text" class="form-control is-invalid" placeholder="Option 1" name="optionOne[value]"
+                id="validationServer03" aria-describedby="validationServer03Feedback" required>
+                {{#if errors.optionOne.value.message}}
+                prueba
+                <div id="validationServer01Feedback" class="invalid-feedback">
+                {{errors.['optionOne.value'].message}}
+                </div>
+                {{/if}}
+                {{!-- option2 --}}
                 <input type="text" class="form-control" placeholder="Option 2" name="optionTwo[value]">
                 <div class="form-text">insert the 'required' alert</div>
                 <input type="text" class="form-control" placeholder="Option 3" name="optionThree[value]">
